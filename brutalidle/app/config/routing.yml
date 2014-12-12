@@ -1,0 +1,11 @@
+brutal_int:
+    resource: "@brutalIntBundle/Resources/config/routing.yml"
+    prefix:   /
+
+brutal_public:
+    resource: "@brutalPublicBundle/Resources/config/routing.yml"
+    prefix:   /
+
+brutal_db:
+    resource: "@brutalDbBundle/Resources/config/routing.yml"
+    prefix:   /

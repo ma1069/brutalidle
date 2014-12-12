@@ -1,0 +1,5 @@
+<ol>
+{% for hero in heroes %}
+	<li>{{ hero.getName() }} <a href="{{ path('p_hero_list_check', {'id' : hero.getId()}) }}">select</a></li>
+{% endfor %}
+</ol>

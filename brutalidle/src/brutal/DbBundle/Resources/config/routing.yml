@@ -1,0 +1,3 @@
+brutal_db_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: brutalDbBundle:Default:index }

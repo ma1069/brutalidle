@@ -1,0 +1,9 @@
+<h1>Signup</h1>
+<form action="{{ path('signup_check') }}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="_username"/>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" />
+    <button type="submit">login</button>
+</form>
+<a href="{{ path('login') }}">login</a>

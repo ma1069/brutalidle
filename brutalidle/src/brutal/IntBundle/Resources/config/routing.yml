@@ -1,0 +1,24 @@
+brutal_int_homepage:
+    path:     /
+    defaults: { _controller: brutalIntBundle:Default:index }
+
+p_fight:
+    path:   /f/{type}
+    defaults: { _controller: brutalIntBundle:Default:fight }
+
+p_hero_levelup:
+    path:   /h/lvlup
+    defaults: { _controller: brutalIntBundle:Default:hLevelUp }
+p_hero_list:
+    path:   /h/list
+    defaults: { _controller: brutalIntBundle:Default:hList }
+p_hero_list_check:
+    path:   /h/list_check/{id}
+    defaults: { _controller: brutalIntBundle:Default:hListCheck }
+p_hero_create:
+    path:   /h/create
+    defaults: { _controller: brutalIntBundle:Default:hCreate }
+p_hero_create_check:
+    path:   /h/create_check
+    defaults: { _controller: brutalIntBundle:Default:hCreateCheck }
+    

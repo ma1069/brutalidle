@@ -1,0 +1,13 @@
+login:
+    path:   /login
+    defaults:  { _controller: brutalPublicBundle:Default:login }
+login_check:
+    path:   /login_check
+logout:
+    path:   /logout
+signup:
+    path:   /signup
+    defaults:  { _controller: brutalPublicBundle:Default:signup }
+signup_check:
+    path:   /signup_check
+    defaults:  { _controller: brutalPublicBundle:Default:signupCheck }

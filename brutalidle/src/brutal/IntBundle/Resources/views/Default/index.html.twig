@@ -1,0 +1,31 @@
+<p>Hello {{ name }}!</p>
+
+{% if hero_id > 0 %}
+<p>You have selected hero {{ hero_id }}.</p>
+{% endif %}
+<p>Select a{% if hero_id>0 %}nother{% endif %} hero <a href="{{ path('p_hero_list') }}">here</a> or create a hero <a href="{{ path('p_hero_create') }}">here</a></p>
+
+{% if hero_id > 0 %}
+
+<h2>Hero stats:</h2>
+
+<p><b>LVL:</b> {{ hero.getLevel() }}</p>
+<p><b>STR:</b> {{ hero.getStr() }}</p>
+<p><b>DEX:</b> {{ hero.getDex() }}</p>
+<p><b>MND:</b> {{ hero.getMnd() }}</p>
+
+<p><b>EXP:</b> {{ hero.getExp() }} / {{ hero.getMaxExp() }} {% if hero.getExp() > hero.getMaxExp() %}You can level up <a href="{{ path('p_hero_levelup') }}">here</a>, but enemies will be tougher{% endif %}</p>
+
+<h2>Computed stats:</h2>
+<p><b>HP:</b> {{ hero.getHP() }}</p>
+<p><b>DMG:</b> {{ hero.getDamage() }}</p>
+<p><b>ARMOR:</b> {{ hero.getArmor() }}</p>
+<p><b>SPEED:</b> {{ hero.getSpeed() }}</p>
+
+{% endif %}
+
+<h2>What do you want to do?</h2>
+
+<p>You can fight type 1 enemies <a href="{{ path('p_fight', {'type' : 1}) }}">here</a></p>
+<p>You can fight type 2 enemies <a href="{{ path('p_fight', {'type' : 2}) }}">here</a></p>
+<p>You can fight type 3 enemies <a href="{{ path('p_fight', {'type' : 3}) }}">here</a></p>
