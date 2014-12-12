@@ -11,6 +11,7 @@ class DefaultController extends Controller
 {
 	const HERO_ID = "hero_id";
 	
+	
 	public function indexAction()
     {
     	$user = $this->getUser();
@@ -21,7 +22,6 @@ class DefaultController extends Controller
     			'name' => $user->getEmail(),
     			'hero_id' => $heroId
     	);
-    	 
     	
     	if ($heroId > 0) {
     		
@@ -29,7 +29,11 @@ class DefaultController extends Controller
     			->getRepository('brutalDbBundle:Hero')
     			->findOneById($heroId);
     		
-    		$data['hero'] = $hero;	
+    		$data['hero'] = $hero;
+    		
+    		$fight = new Fights();
+    		$secs = $fight->CheckSecs($hero);
+    		$data['secs'] = $secs;
     	}
     	    	
     	return $this->render('brutalIntBundle:Default:index.html.twig', $data);
@@ -53,15 +57,24 @@ class DefaultController extends Controller
     	$enemy->setBaseStats();
     	$enemy->jumpToLevel($hero->getLevel());
     	
-    	//
+    	//Fight
     	$fight = new Fights();
-    	$fight->fight($hero, $enemy);
+    	$result = $fight->fight($hero, $enemy);
     	
-    	return $this->render('brutalIntBundle:Default:fight.html.twig');
+    	//Save stuff after the fight
+    	$em = $this->getDoctrine()->getManager();
+    	$em->persist($hero);
+    	$em->flush();
+    	
+    	$data = array(
+    		'result' => $result 
+    	);
+    	
+    	return $this->render('brutalIntBundle:Default:fight.html.twig', $data);
     }
     
     /* Hero Level up */
-    public function hLevelUp()
+    public function hLevelUpAction()
     {
     	$session = $this->getRequest()->getSession();
     	$heroId = $session->get(self::HERO_ID, 0);

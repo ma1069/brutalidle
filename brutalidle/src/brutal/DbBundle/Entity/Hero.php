@@ -92,6 +92,13 @@ class Hero
     private $exp;
 
     /**
+     * @var datetime
+     *
+     * @ORM\Column(name="nextFight", type="datetime", nullable=true)
+     */
+    private $nextFight;
+    
+    /**
      * @var integer
      * 
      * @ORM\ManyToOne(targetEntity="User")
@@ -340,6 +347,29 @@ class Hero
         return $this->exp;
     }
 
+    /**
+     * Set nextFight
+     *
+     * @param datetime $nextFight
+     * @return Hero
+     */
+    public function setNextFight($nextFight)
+    {
+    	$this->nextFight = $nextFight;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get nextFight
+     *
+     * @return datetime
+     */
+    public function getNextFight()
+    {
+    	return $this->nextFight;
+    }
+    
     /**
      * Set owner
      *

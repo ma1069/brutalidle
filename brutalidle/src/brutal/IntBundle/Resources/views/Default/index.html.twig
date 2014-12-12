@@ -14,7 +14,7 @@
 <p><b>DEX:</b> {{ hero.getDex() }}</p>
 <p><b>MND:</b> {{ hero.getMnd() }}</p>
 
-<p><b>EXP:</b> {{ hero.getExp() }} / {{ hero.getMaxExp() }} {% if hero.getExp() > hero.getMaxExp() %}You can level up <a href="{{ path('p_hero_levelup') }}">here</a>, but enemies will be tougher{% endif %}</p>
+<p><b>EXP:</b> {{ hero.getExp() }} / {{ hero.getMaxExp() }} {% if hero.getExp() >= hero.getMaxExp() %}You can level up <a href="{{ path('p_hero_levelup') }}">here</a>, but enemies will be tougher{% endif %}</p>
 
 <h2>Computed stats:</h2>
 <p><b>HP:</b> {{ hero.getHP() }}</p>
@@ -22,10 +22,15 @@
 <p><b>ARMOR:</b> {{ hero.getArmor() }}</p>
 <p><b>SPEED:</b> {{ hero.getSpeed() }}</p>
 
-{% endif %}
 
 <h2>What do you want to do?</h2>
 
-<p>You can fight type 1 enemies <a href="{{ path('p_fight', {'type' : 1}) }}">here</a></p>
-<p>You can fight type 2 enemies <a href="{{ path('p_fight', {'type' : 2}) }}">here</a></p>
-<p>You can fight type 3 enemies <a href="{{ path('p_fight', {'type' : 3}) }}">here</a></p>
+	{% if secs > 0 %}
+		<p>You have to wait {{ secs }} seconds before restoring your HP</p>
+		<p>Refresh the page by clicking <a href="{{ path('brutal_int_homepage') }}">here</a></p>
+	{% else %}
+		<p>You can fight type 1 enemies <a href="{{ path('p_fight', {'type' : 1}) }}">here</a></p>
+		<p>You can fight type 2 enemies <a href="{{ path('p_fight', {'type' : 2}) }}">here</a></p>
+		<p>You can fight type 3 enemies <a href="{{ path('p_fight', {'type' : 3}) }}">here</a></p>
+	{% endif %}
+{% endif %}
