@@ -7,6 +7,7 @@ use \DateInterval;
 
 class Fights 
 {
+	
 	/* EXP FORMULA:
 	 * In order to make a level, I need to win LEVEL_MULTIPLIER fights more than in the previous level.
 	 * So, Let's just calculate maxExp and divide it by LEVEL_MULTIPLIER * Level.
@@ -17,11 +18,23 @@ class Fights
 	const REST_CONST = 5; //Regardless from the damage, let's wait for some secs anyways
 	
 	//Simulate a fight
+	/* FIGHT FORMULA:
+	 * every fight is divided in rounds. Everytime a round starts, the following actions occur:
+	 *  - the HP of each player is increased by its ARMOR value.
+	 *  - the player with the highest PREEMPT value damages the other by PRE_atk-PRE_def
+	 *  - the fastest player attacks the other N times, depending on the SPEED difference
+	 *  - finally, the slowest player attacks.
+	 *  - if one of the player is unscratched, its HP is capped to its original value (just because
+	 *    having an high armor doesn't mean you can heal after each round).
+	 * finally, when one of the player dies, the other gets a proper amount of EXP and then it 
+	 * has to wait for a certain amount of seconds before being able to fight again. This amount
+	 * depends on how much damage it received.
+	 * * */
 	public function fight($hero, $enemy) 
 	{
 		$this->msg_init("Fighting...");
 		//ok. I got a hero, and an enemy. Let's make them fight and then calculate the results.
-		//TODO let's define how a fight occurs
+		
 		$hero_hp = $hero->getHP();
 		$enemy_hp = $enemy->getHP();
 		while ($hero_hp>0 && $enemy_hp>0) 
