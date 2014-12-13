@@ -396,16 +396,25 @@ class Hero
     //Experience required to level up increases by 100 at each level.
     const EXP_COEFF = 100;
     const HP_COEFF = 2;
-    const ARMOR_COEFF = 0.1;
+
     const DMG_STR_COEFF = 1;
-    const DMG_DEX_COEFF = 2;
-    const DMG_MND_COEFF = 1.5;
+    const DMG_DEX_COEFF = 1.04;
+    const DMG_MND_COEFF = 1.02;
     
     const SPEED_STR_COEFF = 1;
-    const SPEED_DEX_COEFF = 1.2;
-    const SPEED_MND_COEFF = 1.1;
+    const SPEED_DEX_COEFF = 1.12;
+    const SPEED_MND_COEFF = 2;
+    
+    const ARMOR_STR_COEFF = 1;
+    const ARMOR_DEX_COEFF = 0.8;
+    const ARMOR_MND_COEFF = 1.2;
+
+    const PRE_STR_COEFF = 1.2;
+    const PRE_DEX_COEFF = 1;
+    const PRE_MND_COEFF = 1.4;
     
     const HERO_TYPES = 3;
+    
     private static $TYPES = array(
     		1 => array(
     				'str' => 5,
@@ -438,14 +447,11 @@ class Hero
 	     
 	    $this->setLevel(1);
 	    $this->setExp(0);
-	    
     }
-    
     public function getMaxExp() 
     {
     	return floor($this->getLevel() * self::EXP_COEFF);	
     }
-    
     public function getHP()
     {
     	return floor($this->getStr() * self::HP_COEFF);
@@ -460,7 +466,11 @@ class Hero
     }
     public function getArmor()
     {
-    	return floor($this->getDex() * self::ARMOR_COEFF);
+    	switch ($this->getType()) {
+    		case 1: return floor($this->getDex() * self::ARMOR_STR_COEFF);
+    		case 2: return floor($this->getDex() * self::ARMOR_DEX_COEFF);
+    		case 3: return floor($this->getDex() * self::ARMOR_MND_COEFF);
+    	}
     }
     public function getSpeed()
     {
@@ -470,6 +480,15 @@ class Hero
     		case 3: return floor($this->getDex() * self::SPEED_MND_COEFF);
     	}
     }
+    public function getPreempt()
+    {
+    	switch ($this->getType()) {
+    		case 1: return floor($this->getMnd() * self::PRE_STR_COEFF);
+    		case 2: return floor($this->getMnd() * self::PRE_DEX_COEFF);
+    		case 3: return floor($this->getMnd() * self::PRE_MND_COEFF);
+    	}
+    }
+    
     
     public function levelUp()
     {

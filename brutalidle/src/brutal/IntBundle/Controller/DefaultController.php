@@ -10,7 +10,7 @@ use brutal\Logic\Fights;
 class DefaultController extends Controller
 {
 	const HERO_ID = "hero_id";
-	
+	const HERO_TYPES = 3;
 	
 	public function indexAction()
     {
@@ -125,7 +125,7 @@ class DefaultController extends Controller
     	$name = $request->request->get("name", "");
     	$type = $request->request->get("type", 0);
     	
-    	if ($name == "" || $type <= 0 || $type >= self::HERO_TYPES) {
+    	if ($name == "" || $type <= 0 || $type > self::HERO_TYPES) {
     		return $this->redirect($this->generateUrl('p_hero_create'));
     	}
     	
